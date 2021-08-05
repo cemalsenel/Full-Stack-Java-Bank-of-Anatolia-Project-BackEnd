@@ -30,11 +30,11 @@ public class UserDetailServiceImpl implements UserDetailsService, UserService {
         userDAO.setFirstName(user.getFirstName());
         userDAO.setLastName(user.getLastName());
         userDAO.setEmail(user.getEmail());
-        Boolean isAdmin = user
-                            .getUserRoles()
-                            .stream()
-                            .filter(role -> role.getRole().getName().equals("ADMIN"))
-                            .findAny().isPresent();
+        Boolean isAdmin = user.
+                getUserRoles().
+                stream().
+                filter( role -> role.getRole().getName().equals("ADMIN")).findAny().isPresent();
+
         userDAO.setIsAdmin(isAdmin);
         return userDAO;
     }

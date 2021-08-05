@@ -1,4 +1,4 @@
-package com.bank.config;
+package com.bank.config.jwt;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -51,7 +51,7 @@ public class JwtUtil {
         return Jwts.builder().setClaims(claims).setSubject(subject)
                 .setIssuedAt(issuedCalendar.getTime())
                 .setExpiration(expiredCalendar.getTime())
-                .signWith(SignatureAlgorithm.HS512, SECRET_KEY).compact();
+                .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
     }
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);

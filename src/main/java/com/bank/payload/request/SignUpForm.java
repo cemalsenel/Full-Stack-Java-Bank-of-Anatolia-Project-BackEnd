@@ -26,9 +26,15 @@ public class SignUpForm {
     private String username;
 
     @NotBlank
+    @Size(min= 6, max=50)
+    private String password;
+
+    @NotBlank
     @Email(message = "Please provide a valid email.")
     @Size(max=50)
     private String email;
+
+
 
     private Set<String> role;
 }

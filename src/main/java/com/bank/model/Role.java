@@ -13,14 +13,12 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 public class Role {
-
-
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long roleId;
     private String name;
 
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL, fetch= FetchType.LAZY)
+    private Set<UserRole> userRoles = new HashSet<>();
 
-    @OneToMany(mappedBy="role", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-    private Set<UserRole> userRoles = new HashSet<UserRole>();
 }
