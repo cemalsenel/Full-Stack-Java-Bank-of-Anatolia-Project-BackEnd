@@ -5,8 +5,10 @@ import com.bank.dao.UserDAO;
 import com.bank.model.Role;
 import com.bank.model.User;
 import com.bank.model.UserRole;
+import com.bank.payload.request.LoginForm;
 import com.bank.payload.request.SignUpForm;
 
+import com.bank.payload.response.LoginResponse;
 import com.bank.payload.response.Response;
 import com.bank.repository.RoleRepo;
 import com.bank.repository.UserRepo;
@@ -46,6 +48,8 @@ public class LoginController {
     @Autowired
     JwtUtil jwtUtil;
 
+    @Autowired
+    UserService userService;
 
     @PostMapping("/register")
     public ResponseEntity<Response> registerUser(@Valid @RequestBody SignUpForm signUpForm){
@@ -86,5 +90,20 @@ public class LoginController {
         response.setMessage("user Registered successfully");
         response.setSuccess(true);
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginForm loginForm){
+        Authentication authentication = authenticationManager
+                                        .authenticate(new UsernamePasswordAuthenticationToken(loginForm.getUsername(), loginForm.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        User user = (User) authentication.getPrincipal();
+
+        String jwt = jwtUtil.generateToken(authentication);
+        UserDAO userDAO = userService.getUserDAO(user);
+
+        return ResponseEntity.ok(new LoginResponse(userDAO, jwt));
+
     }
 }
