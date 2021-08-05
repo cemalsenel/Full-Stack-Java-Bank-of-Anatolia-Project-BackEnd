@@ -1,6 +1,5 @@
 package com.bank.service.Impl;
 
-
 import com.bank.dao.UserDAO;
 import com.bank.model.User;
 import com.bank.repository.UserRepo;
@@ -21,7 +20,6 @@ public class UserDetailServiceImpl implements UserDetailsService, UserService {
     @Autowired
     UserRepo userRepo;
 
-
     @Override
     public UserDAO getUserDAO(User user) {
         UserDAO userDAO = new UserDAO();
@@ -39,10 +37,12 @@ public class UserDetailServiceImpl implements UserDetailsService, UserService {
         return userDAO;
     }
 
+
+
     @Override
     public UserDAO getUserDAOByName(String username) {
         UserDAO userDAO = null;
-        Optional<User> user =  userRepo.findByUsername(username);
+        Optional<User> user = userRepo.findByUsername(username);
         if(user.isPresent()){
             userDAO = getUserDAO(user.get());
         }
@@ -51,10 +51,14 @@ public class UserDetailServiceImpl implements UserDetailsService, UserService {
 
     @Override
     public List<UserDAO> getAllUsers() {
-
-        List<User> users = (List<User>) userRepo.findAll();
-
+        List <User> users = (List<User>) userRepo.findAll();
         return users.stream().map(this::transformUsers).collect(Collectors.toList());
+
+    }
+
+    @Override
+    public void deleteUser(Long id) {
+
     }
 
     public UserDAO transformUsers(User user) {
@@ -69,7 +73,13 @@ public class UserDetailServiceImpl implements UserDetailsService, UserService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepo.findByUsername(username).orElseThrow(()-> new UsernameNotFoundException("Username not found : " + username));
+        User user = userRepo.findByUsername(username).orElseThrow( () ->
+                new UsernameNotFoundException("Username not found " + username));
+
         return user;
     }
+
+
+
+
 }
