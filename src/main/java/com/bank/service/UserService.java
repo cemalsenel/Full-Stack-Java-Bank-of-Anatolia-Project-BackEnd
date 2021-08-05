@@ -1,7 +1,16 @@
 package com.bank.service;
 
-import org.springframework.stereotype.Service;
 
-@Service
-public class UserService {
+import com.bank.dao.UserDAO;
+import com.bank.model.User;
+
+import java.util.List;
+
+public interface UserService {
+
+    UserDAO getUserDAO(User user);
+    UserDAO getUserDAOByName(String username);
+    List <UserDAO> getAllUsers();
+
+
 }
