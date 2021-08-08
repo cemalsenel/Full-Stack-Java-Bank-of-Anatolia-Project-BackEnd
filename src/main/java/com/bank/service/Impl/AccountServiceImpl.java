@@ -11,7 +11,6 @@ import com.bank.repository.RecipientRepo;
 import com.bank.service.AccountService;
 import com.bank.service.TransactionService;
 import com.bank.util.TransactionType;
-import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,17 +52,11 @@ public class AccountServiceImpl implements AccountService {
         Double amount = request.getAmount();
         account.setAccountBalance(account.getAccountBalance().add(new BigDecimal(amount)));
         accountRepo.save(account);
-
         Date date = new Date();
-        Transaction transaction = new Transaction(
-                                                    date,
-                                                    request.getComment(),
-                                                    TransactionType.DEPOSIT.toString(),
-                                                    amount,account.getAccountBalance(),
-                                                    false,
-                                                    account
-                                                );
-
+        Transaction transaction = new Transaction(date, request.getComment(),
+                TransactionType.DEPOSIT.toString(),
+                amount,account.getAccountBalance(),
+                false, account );
         transactionService.saveTransaction(transaction);
     }
 
@@ -72,18 +65,14 @@ public class AccountServiceImpl implements AccountService {
         Account account = user.getAccount();
         Double amount = request.getAmount();
         account.setAccountBalance(account.getAccountBalance().subtract(new BigDecimal(amount)));
-        accountRepo.save(account);
-
         Date date = new Date();
-        Transaction transaction = new Transaction(
-                                                    date,
-                                                    request.getComment(),
-                                                    TransactionType.WITHDRAW.toString(),
-                                                    amount,account.getAccountBalance(),
-                                                    false,
-                                                    account
-                                                );
+        Transaction transaction = new Transaction(date, request.getComment(),
+                TransactionType.WITHDRAW.toString(),
+                amount,account.getAccountBalance(),
+                false, account );
+
         transactionService.saveTransaction(transaction);
+        accountRepo.save(account);
     }
 
     @Override
@@ -97,16 +86,11 @@ public class AccountServiceImpl implements AccountService {
         Double amount = request.getAmount();
         account.setAccountBalance(account.getAccountBalance().subtract(new BigDecimal(amount)));
         accountRepo.save(account);
-
         Date date = new Date();
-        Transaction transaction = new Transaction(
-                date,
-                request.getRecipientName(),
+        Transaction transaction = new Transaction(date, request.getRecipientName(),
                 TransactionType.TRANSFER.toString(),
                 amount,account.getAccountBalance(),
-                false,
-                account
-        );
-                transactionService.saveTransaction(transaction);
+                false, account );
+        transactionService.saveTransaction(transaction);
     }
 }

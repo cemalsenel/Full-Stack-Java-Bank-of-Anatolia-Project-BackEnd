@@ -1,11 +1,9 @@
 package com.bank.util;
 
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class DateUtil {
-
 
     private DateUtil(){
 
@@ -18,4 +16,5 @@ public class DateUtil {
         SimpleDateFormat format = new SimpleDateFormat(pattern);
         return format.format(date);
     }
+
 }

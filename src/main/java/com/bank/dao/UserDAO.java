@@ -1,5 +1,4 @@
 package com.bank.dao;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
@@ -9,7 +8,6 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.util.List;
 
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,10 +15,8 @@ import java.util.List;
 public class UserDAO {
     private Long userId;
     private String username;
-
     @JsonIgnore
     private String password;
-
     private  String firstName;
     private  String lastName;
     private String email;

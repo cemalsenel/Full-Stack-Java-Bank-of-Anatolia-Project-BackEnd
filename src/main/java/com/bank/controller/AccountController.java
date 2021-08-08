@@ -29,63 +29,55 @@ public class AccountController {
     UserService userService;
 
     @PostMapping("/deposit")
-    public ResponseEntity<TransactionResponse> deposit(@Valid @RequestBody TransactionRequest transactionRequest){
+    public ResponseEntity<TransactionResponse> deposit (@Valid @RequestBody TransactionRequest transactionRequest){
         TransactionResponse response = new TransactionResponse();
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         accountService.deposit(transactionRequest, user);
-        response.setMessage("Amount successfully deposited!");
+        response.setMessage("Amount succesfully deposited");
         response.setSuccess(true);
-
         UserDAO userDAO = userService.getUserDAOByName(user.getUsername());
         response.setUser(userDAO);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+
     @PostMapping("/withdraw")
-    public ResponseEntity<TransactionResponse> withdraw(@Valid @RequestBody TransactionRequest transactionRequest){
+    public ResponseEntity<TransactionResponse> withdraw (@Valid @RequestBody TransactionRequest transactionRequest){
         TransactionResponse response = new TransactionResponse();
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         accountService.withdraw(transactionRequest, user);
-        response.setMessage("Amount successfully withdrawn!");
+        response.setMessage("Amount succesfully withdrawed");
         response.setSuccess(true);
-
         UserDAO userDAO = userService.getUserDAOByName(user.getUsername());
         response.setUser(userDAO);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("/transfer")
-    public ResponseEntity<TransactionResponse> transfer(@Valid @RequestBody TransferRequest transferRequest){
+    public ResponseEntity<TransactionResponse> transfer (@Valid @RequestBody TransferRequest transferRequest){
         TransactionResponse response = new TransactionResponse();
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         accountService.transfer(transferRequest, user);
-        response.setMessage("Amount successfully transferred!");
+        response.setMessage("Amount succesfully transfered");
         response.setSuccess(true);
-
         UserDAO userDAO = userService.getUserDAOByName(user.getUsername());
         response.setUser(userDAO);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PostMapping("/addRecipient")
-    public ResponseEntity<TransactionResponse> addRecipient(@Valid @RequestBody RecipientForm recipientForm){
+    public ResponseEntity<TransactionResponse> addRecipient (@Valid @RequestBody RecipientForm request){
         TransactionResponse response = new TransactionResponse();
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        Recipient recipient = new Recipient(
-                recipientForm.getName(),
-                recipientForm.getEmail(),
-                recipientForm.getPhone(),
-                recipientForm.getBankName(),
-                recipientForm.getBankNumber()
-        );
-
+        Recipient recipient = new Recipient(request.getName(), request.getEmail(),request.getPhone(),
+                request.getBankName(), request.getBankNumber());
         recipient.setUser(user);
         accountService.saveRecipient(recipient);
-        response.setMessage("Recipient successfully added!");
+        response.setMessage("Recipient succesfully added");
         response.setSuccess(true);
         UserDAO userDAO = userService.getUserDAOByName(user.getUsername());
         response.setUser(userDAO);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
 }

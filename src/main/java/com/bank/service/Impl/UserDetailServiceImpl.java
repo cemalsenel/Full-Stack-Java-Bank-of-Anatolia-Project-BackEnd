@@ -43,18 +43,18 @@ public class UserDetailServiceImpl implements UserDetailsService, UserService {
 
         userDAO.setIsAdmin(isAdmin);
 
-        //AccountNumber and AccountBalance
-        if(user.getAccount() != null){
+        //AccountNumber and Account Balance
+        if(user.getAccount() != null ){
             userDAO.setAccountNumber(user.getAccount().getAccountNumber());
             userDAO.setAccountBalance(user.getAccount().getAccountBalance());
         }
+        List<TransactionDAO> transactions = user.getAccount().getTransactions().stream().
+                map(this::getTransactionDAO).collect(Collectors.toList());
 
-        List<TransactionDAO> transactions = user.getAccount().getTransactions().stream().map(this::getTransactionDAO).collect(Collectors.toList());
         userDAO.setTransactions(transactions);
-
-        List<RecipientDAO> recipients = user.getRecipients().stream().map(this::getRecipientDAO).collect(Collectors.toList());
+        List <RecipientDAO> recipients = user.getRecipients().stream().
+                map(this::getRecipientDAO).collect(Collectors.toList());
         userDAO.setRecipients(recipients);
-
         return userDAO;
     }
 
@@ -82,7 +82,6 @@ public class UserDetailServiceImpl implements UserDetailsService, UserService {
         return recipientDAO;
     }
 
-
     @Override
     public UserDAO getUserDAOByName(String username) {
         UserDAO userDAO = null;
@@ -107,16 +106,16 @@ public class UserDetailServiceImpl implements UserDetailsService, UserService {
 
         if(userOptional.isPresent()){
             User user = userOptional.get();
-            recipients = user.getRecipients().stream().map(this::getRecipientDAO).collect(Collectors.toList());
+            recipients = user.getRecipients().stream().map(this::getRecipientDAO).
+                    collect(Collectors.toList());
         }
-
         return recipients;
     }
 
-    @Override
-    public void deleteUser(Long id) {
-
-    }
+//    @Override
+//    public void deleteUser(Long id) {
+//
+//    }
 
     public UserDAO transformUsers(User user) {
         UserDAO userDAO = new UserDAO();
@@ -135,8 +134,6 @@ public class UserDetailServiceImpl implements UserDetailsService, UserService {
 
         return user;
     }
-
-
 
 
 }

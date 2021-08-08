@@ -9,21 +9,20 @@ import javax.validation.constraints.Size;
 
 @Data
 public class RecipientForm {
-
     @NotBlank
     private String name;
-
     @Email
     private String email;
 
     @NotNull
-    private String phone;
+    private Integer phone;
 
     @NotBlank
-    @Size(min = 3, max = 50)
+    @Size(min=3, max=50)
     private String bankName;
 
     @NotBlank
-    @Size(min = 16, max = 16)
+    @Size(min=16, max=16)
     private String bankNumber;
+
 }

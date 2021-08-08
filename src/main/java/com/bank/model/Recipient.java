@@ -10,18 +10,17 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 public class Recipient {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String email;
-    private String phone;
+    private Integer phone;
     private String bankName;
     private String bankNumber;
 
-    public Recipient(String name, String email, String phone, String bankName, String bankNumber) {
+    public Recipient(String name, String email, Integer phone,
+                     String bankName, String bankNumber) {
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -33,5 +32,4 @@ public class Recipient {
     @JoinColumn(name="user_id")
     @JsonIgnore
     private User user;
-
 }

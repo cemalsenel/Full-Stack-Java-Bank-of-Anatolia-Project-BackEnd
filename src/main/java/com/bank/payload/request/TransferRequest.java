@@ -7,10 +7,8 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class TransferRequest {
-
     @NotBlank
     private String recipientName;
-
     @NotNull
     private Double amount;
 }

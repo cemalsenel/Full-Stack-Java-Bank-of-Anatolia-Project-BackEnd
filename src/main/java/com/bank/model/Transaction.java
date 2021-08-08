@@ -11,10 +11,9 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 public class Transaction {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long id;
+    private Long id;
     private Date date;
     private String description;
     private String type;
@@ -23,10 +22,11 @@ public class Transaction {
     private Boolean isTransfer;
 
     @ManyToOne
-    @JoinColumn(name="account_id")
+    @JoinColumn(name= "account_id")
     private Account account;
 
-    public Transaction(Date date, String description, String type, double amount, BigDecimal availableBalance, Boolean isTransfer, Account account) {
+    public Transaction(Date date, String description, String type, double amount,
+                       BigDecimal availableBalance, Boolean isTransfer, Account account) {
         this.date = date;
         this.description = description;
         this.type = type;

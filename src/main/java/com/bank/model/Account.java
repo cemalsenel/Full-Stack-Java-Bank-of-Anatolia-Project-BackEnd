@@ -11,18 +11,12 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class Account {
-
         @Id
-        @GeneratedValue(strategy =GenerationType.IDENTITY)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
-
         private Long accountNumber;
-
         private BigDecimal accountBalance;
 
-        @OneToMany(mappedBy = "account", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+        @OneToMany(mappedBy="account", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
         private List<Transaction> transactions;
-
-
-
 }

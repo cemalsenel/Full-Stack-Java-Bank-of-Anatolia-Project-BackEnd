@@ -49,7 +49,6 @@ public class User  implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Recipient> recipients;
 
-
     @Override
     // DİKKAT: Bu kısım implement edilmedi!!!
     public Collection<? extends GrantedAuthority> getAuthorities() {
