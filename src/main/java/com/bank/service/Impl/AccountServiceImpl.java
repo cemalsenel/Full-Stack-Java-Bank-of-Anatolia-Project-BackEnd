@@ -9,6 +9,7 @@ import com.bank.payload.request.TransferRequest;
 import com.bank.repository.AccountRepo;
 import com.bank.repository.RecipientRepo;
 import com.bank.service.AccountService;
+import com.bank.service.TransactionService;
 import com.bank.util.TransactionType;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class AccountServiceImpl implements AccountService {
 
     @Autowired
     RecipientRepo recipientRepo;
+
+    @Autowired
+    TransactionService transactionService;
 
     @Override
     public Account createAccount() {
@@ -60,7 +64,7 @@ public class AccountServiceImpl implements AccountService {
                                                     account
                                                 );
 
-//        transactionService.save(transaction);
+        transactionService.saveTransaction(transaction);
     }
 
     @Override
@@ -79,7 +83,7 @@ public class AccountServiceImpl implements AccountService {
                                                     false,
                                                     account
                                                 );
-        //        transactionService.save(transaction);
+        transactionService.saveTransaction(transaction);
     }
 
     @Override
@@ -103,6 +107,6 @@ public class AccountServiceImpl implements AccountService {
                 false,
                 account
         );
-        //        transactionService.save(transaction);
+                transactionService.saveTransaction(transaction);
     }
 }

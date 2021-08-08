@@ -12,6 +12,7 @@ import com.bank.payload.response.LoginResponse;
 import com.bank.payload.response.Response;
 import com.bank.repository.RoleRepo;
 import com.bank.repository.UserRepo;
+import com.bank.service.AccountService;
 import com.bank.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,9 @@ public class LoginController {
     @Autowired
     UserService userService;
 
+    @Autowired
+    AccountService accountService;
+
     @PostMapping("/register")
     public ResponseEntity<Response> registerUser(@Valid @RequestBody SignUpForm signUpForm){
         // Response object
@@ -86,8 +90,9 @@ public class LoginController {
         });
 
         user.setUserRoles(userRoles);
+        user.setAccount(accountService.createAccount());
         userRepo.save(user);
-        response.setMessage("user Registered successfully");
+        response.setMessage("User registered successfully");
         response.setSuccess(true);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
