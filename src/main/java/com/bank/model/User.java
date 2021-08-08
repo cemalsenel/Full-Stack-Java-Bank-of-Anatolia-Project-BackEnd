@@ -43,6 +43,11 @@ public class User  implements UserDetails {
         this.email = email;
     }
 
+    @OneToOne
+    private Account account;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Recipient> recipients;
 
 
     @Override
