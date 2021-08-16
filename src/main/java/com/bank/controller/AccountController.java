@@ -54,7 +54,7 @@ public class AccountController {
         if (user != null && user.getAccount() != null
                 && user.getAccount().getAccountBalance().doubleValue() >= transactionRequest.getAmount()) {
             accountService.withdraw(transactionRequest, user);
-            response.setMessage("Amount succesfully withdrawed");
+            response.setMessage("Amount successfully withdrawn");
             response.setSuccess(true);
             UserDAO userDAO = userService.getUserDAOByName(user.getUsername());
             response.setUser(userDAO);

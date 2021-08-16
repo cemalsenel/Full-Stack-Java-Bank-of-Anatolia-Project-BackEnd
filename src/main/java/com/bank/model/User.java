@@ -16,6 +16,7 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @Entity
+//@Table(name="user", schema="public") ==> postgresql için özel
 public class User  implements UserDetails {
 
     private static final long serialVersionUID = 1L;
