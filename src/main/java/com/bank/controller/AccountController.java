@@ -34,7 +34,7 @@ public class AccountController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if(transactionRequest.getAmount() > 0) {
             accountService.deposit(transactionRequest, user);
-            response.setMessage("Amount succesfully deposited");
+            response.setMessage("Amount successfully deposited");
             response.setSuccess(true);
             UserDAO userDAO = userService.getUserDAOByName(user.getUsername());
             response.setUser(userDAO);
@@ -64,6 +64,7 @@ public class AccountController {
             response.setSuccess(false);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
+
     }
 
     @PostMapping("/transfer")
@@ -73,8 +74,9 @@ public class AccountController {
 
         if (user != null && user.getAccount() != null
                 && user.getAccount().getAccountBalance().doubleValue() >= transferRequest.getAmount()) {
+
             accountService.transfer(transferRequest, user);
-            response.setMessage("Amount transfered succesfully");
+            response.setMessage("Amount transferred successfully");
             response.setSuccess(true);
             UserDAO userDAO = userService.getUserDAOByName(user.getUsername());
             response.setUser(userDAO);
@@ -84,7 +86,6 @@ public class AccountController {
             response.setSuccess(false);
             return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
-
     }
 
     @PostMapping("/addRecipient")
@@ -95,7 +96,7 @@ public class AccountController {
                 request.getBankName(), request.getBankNumber());
         recipient.setUser(user);
         accountService.saveRecipient(recipient);
-        response.setMessage("Recipient succesfully added");
+        response.setMessage("Recipient successfully added");
         response.setSuccess(true);
         UserDAO userDAO = userService.getUserDAOByName(user.getUsername());
         response.setUser(userDAO);

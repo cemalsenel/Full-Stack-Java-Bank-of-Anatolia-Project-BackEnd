@@ -96,7 +96,7 @@ public class AccountServiceImpl implements AccountService {
         Transaction transaction = new Transaction(date, request.getRecipientName(),
                 TransactionType.TRANSFER.toString(),
                 amount,account.getAccountBalance(),
-                false, account );
+                true, account );
         List<Transaction> transactions = account.getTransactions();
         transactions.add(transaction);
         account.setTransactions(transactions);
