@@ -13,9 +13,9 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>BankOfAnatolia</name>
 	<description>Bank of Anatolia</description>
-	<properties>
-		<java.version>1.8</java.version>
-	</properties>
+<!--	<properties>-->
+<!--		<java.version>1.8</java.version>-->
+<!--	</properties>-->
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
