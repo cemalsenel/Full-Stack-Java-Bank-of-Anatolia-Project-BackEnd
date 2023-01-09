@@ -1,1 +1,1 @@
-"# bankOfAnatoliaBackEnd" 
+The Spring Boot project was created by adding Spring Boot Devtools, Lombok, Spring Web, Spring Security, Spring Data JPA, MySQL drivers and validation dependencies that we will manage with Maven. A database was created in MySQL for the project. Front-End design was done using HTML, CSS, Bootstrap and Javascript via React.JS framework.
